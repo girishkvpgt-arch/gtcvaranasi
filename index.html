@@ -1,0 +1,2468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Vridhi - Premium wealth growth, smart savings tracker, and SIP investment calculator for personal financial freedom in India.">
+  <title>Vridhi | Grow Your Wealth, One Smart Decision at a Time</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    /* CSS RESET & VARIABLES */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      /* Colors - Dark Theme (Default) */
+      --bg-primary: #080F1E;
+      --bg-secondary: #0F1A30;
+      --card-bg: rgba(19, 34, 56, 0.65);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --text-primary: #F3F4F6;
+      --text-secondary: #9CA3AF;
+      --text-muted: #6B7280;
+      --accent-green: #00C896;
+      --accent-green-glow: rgba(0, 200, 150, 0.25);
+      --accent-green-hover: #00e0a8;
+      --navy-deep: #050A14;
+      --header-bg: rgba(8, 15, 30, 0.85);
+      --slider-track: #1E293B;
+      --slider-thumb: #00C896;
+      --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+      --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.3);
+      --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.4);
+      --toast-bg: #132238;
+      --toast-border: #1E3A5F;
+      --font-headings: 'Poppins', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --transition-speed: 300ms;
+    }
+
+    .light-theme {
+      /* Colors - Light Theme */
+      --bg-primary: #F3F4F6;
+      --bg-secondary: #FFFFFF;
+      --card-bg: rgba(255, 255, 255, 0.85);
+      --card-border: rgba(0, 0, 0, 0.08);
+      --text-primary: #0F172A;
+      --text-secondary: #4B5563;
+      --text-muted: #9CA3AF;
+      --accent-green: #00A87E;
+      --accent-green-glow: rgba(0, 168, 126, 0.2);
+      --accent-green-hover: #008f6b;
+      --navy-deep: #F9FAFB;
+      --header-bg: rgba(243, 244, 246, 0.85);
+      --slider-track: #E2E8F0;
+      --slider-thumb: #00A87E;
+      --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+      --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.1);
+      --toast-bg: #FFFFFF;
+      --toast-border: #E2E8F0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      overflow-x: hidden;
+      transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+    }
+
+    /* TYPOGRAPHY */
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-headings);
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--text-primary);
+    }
+
+    p {
+      color: var(--text-secondary);
+      font-size: 1rem;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* GLOBAL UTILITIES & REVEAL ON SCROLL */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .section {
+      padding: 100px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .section-title h2 {
+      font-size: 2.25rem;
+      margin-bottom: 12px;
+    }
+
+    .section-title p {
+      max-width: 600px;
+      margin: 0 auto;
+      font-size: 1.1rem;
+    }
+
+    .highlight {
+      color: var(--accent-green);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 28px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all var(--transition-speed) ease;
+      border: none;
+      outline: none;
+      font-family: var(--font-body);
+    }
+
+    .btn-primary {
+      background-color: var(--accent-green);
+      color: #050A14;
+      box-shadow: 0 4px 14px var(--accent-green-glow);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--accent-green-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px var(--accent-green-glow);
+    }
+
+    .btn-secondary {
+      background-color: transparent;
+      color: var(--text-primary);
+      border: 1.5px solid var(--card-border);
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--card-border);
+      transform: translateY(-2px);
+    }
+
+    /* Glass Card Standard */
+    .glass-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      backdrop-filter: blur(12px);
+      border-radius: 16px;
+      padding: 32px;
+      box-shadow: var(--shadow-md);
+      transition: transform var(--transition-speed) ease, border-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+    }
+
+    .glass-card:hover {
+      border-color: rgba(0, 200, 150, 0.3);
+      box-shadow: var(--shadow-lg);
+    }
+
+    /* Scroll animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 800ms ease, transform 800ms ease;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* STICKY HEADER */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      background-color: transparent;
+      border-bottom: 1px solid transparent;
+      transition: background-color var(--transition-speed) ease, border-color var(--transition-speed) ease, padding var(--transition-speed) ease;
+      padding: 24px 0;
+    }
+
+    .header.scrolled {
+      background-color: var(--header-bg);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--card-border);
+      padding: 16px 0;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .header-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-text {
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      font-family: var(--font-headings);
+      background: linear-gradient(135deg, #FFF, var(--accent-green));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .light-theme .logo-text {
+      background: linear-gradient(135deg, #0A1628, var(--accent-green));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-list {
+      display: flex;
+      list-style: none;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .nav-link {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      position: relative;
+      padding: 4px 0;
+      transition: color var(--transition-speed) ease;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--accent-green);
+      transition: width var(--transition-speed) ease;
+    }
+
+    .nav-link:hover {
+      color: var(--text-primary);
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    /* THEME TOGGLE SWITCH */
+    .theme-toggle-btn {
+      background: transparent;
+      border: 1px solid var(--card-border);
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--text-primary);
+      transition: all var(--transition-speed) ease;
+    }
+
+    .theme-toggle-btn:hover {
+      background-color: var(--card-border);
+      border-color: var(--accent-green);
+      color: var(--accent-green);
+    }
+
+    .theme-toggle-btn svg {
+      width: 20px;
+      height: 20px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+    }
+
+    .sun-icon {
+      display: none;
+    }
+
+    .light-theme .sun-icon {
+      display: block;
+    }
+
+    .light-theme .moon-icon {
+      display: none;
+    }
+
+    /* Hamburger Menu */
+    .menu-toggle {
+      display: none;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      color: var(--text-primary);
+    }
+
+    /* HERO SECTION */
+    .hero-section {
+      padding-top: 180px;
+      padding-bottom: 100px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Blurred background glow circles */
+    .glow-circle {
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      filter: blur(120px);
+      z-index: -1;
+      opacity: 0.15;
+    }
+
+    .glow-1 {
+      top: 10%;
+      right: 5%;
+      background: var(--accent-green);
+    }
+
+    .glow-2 {
+      bottom: 20%;
+      left: 5%;
+      background: #3B82F6;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      align-items: center;
+      gap: 60px;
+    }
+
+    .hero-content h1 {
+      font-size: 3.25rem;
+      line-height: 1.2;
+      margin-bottom: 24px;
+      letter-spacing: -1px;
+    }
+
+    .hero-content p {
+      font-size: 1.15rem;
+      margin-bottom: 40px;
+      max-width: 540px;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 16px;
+    }
+
+    /* Hero Interactive wealth graphic */
+    .hero-visual {
+      position: relative;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .hero-graphic-card {
+      width: 100%;
+      max-width: 460px;
+      position: relative;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-15px); }
+      100% { transform: translateY(0px); }
+    }
+
+    .graphic-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .graphic-title {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .graphic-balance {
+      font-size: 1.85rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .graphic-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(0, 200, 150, 0.15);
+      border: 1px solid rgba(0, 200, 150, 0.25);
+      color: var(--accent-green);
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .graphic-chart-svg {
+      width: 100%;
+      height: 180px;
+    }
+
+    .pulse-dot {
+      fill: var(--accent-green);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { r: 4px; opacity: 1; }
+      50% { r: 8px; opacity: 0.4; }
+      100% { r: 4px; opacity: 1; }
+    }
+
+    /* STATS BAR */
+    .stats-bar {
+      padding: 40px 0;
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--card-border);
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      text-align: center;
+    }
+
+    .stat-item h3 {
+      font-size: 2.5rem;
+      color: var(--accent-green);
+      margin-bottom: 6px;
+    }
+
+    .stat-item p {
+      font-size: 0.9rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-secondary);
+    }
+
+    /* FEATURES SECTION */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .feature-card {
+      display: flex;
+      gap: 24px;
+      align-items: flex-start;
+      border-radius: 16px;
+    }
+
+    .feature-icon-wrapper {
+      background: rgba(0, 200, 150, 0.1);
+      border: 1px solid rgba(0, 200, 150, 0.15);
+      width: 56px;
+      height: 56px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-green);
+      flex-shrink: 0;
+    }
+
+    .feature-card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 12px;
+    }
+
+    /* HOW IT WORKS SECTION */
+    .how-it-works-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      position: relative;
+    }
+
+    .step-card {
+      position: relative;
+      text-align: center;
+      padding-top: 40px;
+    }
+
+    .step-number {
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 4rem;
+      font-weight: 800;
+      color: var(--card-border);
+      line-height: 1;
+      z-index: 1;
+      user-select: none;
+      transition: color var(--transition-speed) ease;
+    }
+
+    .step-card:hover .step-number {
+      color: var(--accent-green-glow);
+    }
+
+    .step-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .step-icon-wrapper {
+      width: 72px;
+      height: 72px;
+      background: var(--bg-primary);
+      border: 2px solid var(--card-border);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+      color: var(--accent-green);
+      transition: border-color var(--transition-speed) ease;
+    }
+
+    .step-card:hover .step-icon-wrapper {
+      border-color: var(--accent-green);
+    }
+
+    .step-card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 12px;
+    }
+
+    /* SAVINGS CALCULATOR */
+    .calculator-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 40px;
+      align-items: stretch;
+    }
+
+    .calculator-inputs {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .input-label-row {
+      display: flex;
+      justify-content: space-between;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .input-val-box {
+      color: var(--accent-green);
+      font-weight: 700;
+    }
+
+    .range-slider {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 6px;
+      border-radius: 3px;
+      background: var(--slider-track);
+      outline: none;
+      cursor: pointer;
+    }
+
+    .range-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--slider-thumb);
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(0, 200, 150, 0.4);
+      transition: transform 150ms ease;
+    }
+
+    .range-slider::-webkit-slider-thumb:hover {
+      transform: scale(1.2);
+    }
+
+    .range-slider::-moz-range-thumb {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--slider-thumb);
+      cursor: pointer;
+      border: none;
+      box-shadow: 0 0 10px rgba(0, 200, 150, 0.4);
+      transition: transform 150ms ease;
+    }
+
+    .range-slider::-moz-range-thumb:hover {
+      transform: scale(1.2);
+    }
+
+    .quick-values {
+      display: flex;
+      gap: 8px;
+    }
+
+    .quick-val-btn {
+      background: var(--bg-primary);
+      border: 1px solid var(--card-border);
+      color: var(--text-secondary);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all var(--transition-speed) ease;
+    }
+
+    .quick-val-btn:hover {
+      border-color: var(--accent-green);
+      color: var(--accent-green);
+    }
+
+    /* Calculator Results Styling */
+    .calculator-results {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .result-box {
+      background: var(--bg-primary);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 16px;
+      text-align: center;
+    }
+
+    .result-box p {
+      font-size: 0.8rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+    }
+
+    .result-box h4 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .result-box.highlighted-box {
+      border-color: var(--accent-green);
+    }
+    
+    .result-box.highlighted-box h4 {
+      color: var(--accent-green);
+    }
+
+    .chart-container {
+      position: relative;
+      width: 100%;
+      flex-grow: 1;
+      min-height: 240px;
+      background: var(--bg-primary);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .chart-title-area {
+      padding: 12px 16px 4px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    .chart-legend {
+      display: flex;
+      gap: 12px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .legend-color {
+      width: 10px;
+      height: 10px;
+      border-radius: 2px;
+    }
+
+    .legend-invested { background: #3B82F6; }
+    .legend-wealth { background: var(--accent-green); }
+
+    .canvas-wrapper {
+      position: relative;
+      flex-grow: 1;
+      width: 100%;
+      height: calc(100% - 35px);
+    }
+
+    #calcChart {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    /* INVESTMENT CATEGORIES */
+    .investment-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 24px;
+    }
+
+    .investment-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 280px;
+    }
+
+    .inv-top {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .inv-badge-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .inv-risk {
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .risk-low {
+      background: rgba(16, 185, 129, 0.15);
+      color: #10B981;
+      border: 1px solid rgba(16, 185, 129, 0.2);
+    }
+
+    .risk-medium {
+      background: rgba(245, 158, 11, 0.15);
+      color: #F59E0B;
+      border: 1px solid rgba(245, 158, 11, 0.2);
+    }
+
+    .risk-high {
+      background: rgba(239, 68, 68, 0.15);
+      color: #EF4444;
+      border: 1px solid rgba(239, 68, 68, 0.2);
+    }
+
+    .inv-returns {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--accent-green);
+    }
+
+    .investment-card h3 {
+      font-size: 1.35rem;
+    }
+
+    .investment-card p {
+      font-size: 0.9rem;
+    }
+
+    .inv-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--accent-green);
+      margin-top: 16px;
+      transition: gap var(--transition-speed) ease;
+    }
+
+    .investment-card:hover .inv-link {
+      gap: 10px;
+    }
+
+    /* TESTIMONIALS SECTION */
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .testimonial-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    .quote-icon {
+      position: absolute;
+      top: 16px;
+      right: 24px;
+      font-size: 3rem;
+      color: var(--card-border);
+      line-height: 1;
+      font-family: Georgia, serif;
+    }
+
+    .testimonial-text {
+      font-style: italic;
+      margin-bottom: 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .testimonial-stars {
+      color: #F59E0B;
+      display: flex;
+      gap: 2px;
+      margin-bottom: 16px;
+    }
+
+    .testimonial-user {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .user-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 2px solid var(--accent-green);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg-primary);
+      overflow: hidden;
+    }
+
+    .user-avatar svg {
+      width: 32px;
+      height: 32px;
+      color: var(--text-secondary);
+    }
+
+    .user-info h4 {
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .user-info p {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    /* FAQ ACCORDION */
+    .faq-layout {
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .faq-item {
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      background: var(--card-bg);
+      overflow: hidden;
+      transition: border-color var(--transition-speed) ease;
+    }
+
+    .faq-item:hover {
+      border-color: rgba(0, 200, 150, 0.2);
+    }
+
+    .faq-question {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 24px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      text-align: left;
+      font-family: var(--font-headings);
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      outline: none;
+    }
+
+    .faq-icon {
+      width: 20px;
+      height: 20px;
+      transition: transform var(--transition-speed) cubic-bezier(0.4, 0, 0.2, 1);
+      color: var(--text-secondary);
+      flex-shrink: 0;
+    }
+
+    .faq-item.active .faq-icon {
+      transform: rotate(180deg);
+      color: var(--accent-green);
+    }
+
+    .faq-answer-wrapper {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height var(--transition-speed) cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .faq-answer {
+      padding: 0 24px 24px;
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+    }
+
+    /* NEWSLETTER CTA */
+    .newsletter-section {
+      position: relative;
+    }
+
+    .newsletter-card {
+      background: linear-gradient(135deg, var(--bg-secondary), var(--navy-deep));
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      padding: 60px;
+      text-align: center;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .newsletter-card h2 {
+      font-size: 2.25rem;
+      margin-bottom: 12px;
+    }
+
+    .newsletter-card p {
+      max-width: 500px;
+      margin: 0 auto 32px;
+      font-size: 1.05rem;
+    }
+
+    .newsletter-form {
+      display: flex;
+      max-width: 480px;
+      margin: 0 auto 16px;
+      gap: 12px;
+    }
+
+    .email-input {
+      flex-grow: 1;
+      background: var(--bg-primary);
+      border: 1.5px solid var(--card-border);
+      color: var(--text-primary);
+      padding: 14px 20px;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-family: var(--font-body);
+      outline: none;
+      transition: border-color var(--transition-speed) ease;
+    }
+
+    .email-input:focus {
+      border-color: var(--accent-green);
+    }
+
+    .privacy-note {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* FOOTER */
+    .footer {
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--card-border);
+      padding: 80px 0 40px;
+      color: var(--text-secondary);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1.5fr;
+      gap: 40px;
+      margin-bottom: 60px;
+    }
+
+    .footer-brand {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .footer-tagline {
+      font-size: 0.95rem;
+      max-width: 280px;
+    }
+
+    .footer-socials {
+      display: flex;
+      gap: 12px;
+    }
+
+    .social-btn {
+      width: 36px;
+      height: 36px;
+      background: var(--bg-primary);
+      border: 1px solid var(--card-border);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-secondary);
+      transition: all var(--transition-speed) ease;
+    }
+
+    .social-btn:hover {
+      background: var(--accent-green);
+      color: #050A14;
+      border-color: var(--accent-green);
+      transform: translateY(-2px);
+    }
+
+    .social-btn svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .footer-col h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 24px;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .footer-link {
+      font-size: 0.9rem;
+      transition: color var(--transition-speed) ease;
+    }
+
+    .footer-link:hover {
+      color: var(--accent-green);
+    }
+
+    .footer-app-badges {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .app-badge-btn {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--bg-primary);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 10px 16px;
+      text-align: left;
+      cursor: pointer;
+      transition: all var(--transition-speed) ease;
+    }
+
+    .app-badge-btn:hover {
+      border-color: var(--accent-green);
+      transform: translateY(-2px);
+    }
+
+    .app-badge-btn svg {
+      width: 24px;
+      height: 24px;
+      color: var(--text-primary);
+    }
+
+    .app-badge-text p {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      line-height: 1.1;
+    }
+
+    .app-badge-text h4 {
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid var(--card-border);
+      padding-top: 40px;
+      text-align: center;
+    }
+
+    .disclaimer {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      max-width: 900px;
+      margin: 0 auto 24px;
+    }
+
+    .copyright {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* CUSTOM FLOATING TOAST */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--toast-bg);
+      border: 1px solid var(--toast-border);
+      border-radius: 10px;
+      padding: 16px 24px;
+      box-shadow: var(--shadow-lg);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      z-index: 1100;
+      transform: translateY(100px);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 400ms cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 400ms ease;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .toast-icon {
+      color: var(--accent-green);
+      flex-shrink: 0;
+    }
+
+    .toast-message {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+
+    /* RESPONSIVENESS */
+    @media (max-width: 1280px) {
+      .container {
+        padding: 0 32px;
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 50px;
+        text-align: center;
+      }
+      
+      .hero-content p {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .hero-ctas {
+        justify-content: center;
+      }
+
+      .calculator-layout {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .section {
+        padding: 80px 0;
+      }
+
+      .hero-content h1 {
+        font-size: 2.5rem;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .how-it-works-grid {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+
+      .testimonials-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .newsletter-card {
+        padding: 40px 24px;
+      }
+
+      .newsletter-form {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 40px;
+      }
+
+      /* MOBILE MENU NAVIGATION */
+      .menu-toggle {
+        display: block;
+      }
+
+      .nav-list {
+        position: fixed;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        height: 0;
+        background-color: var(--bg-primary);
+        border-bottom: 1px solid var(--card-border);
+        flex-direction: column;
+        justify-content: center;
+        gap: 24px;
+        overflow: hidden;
+        transition: height var(--transition-speed) ease;
+        z-index: 999;
+      }
+
+      .nav-list.open {
+        height: 320px;
+      }
+
+      .nav-actions {
+        gap: 12px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-content h1 {
+        font-size: 2rem;
+      }
+
+      .hero-ctas {
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .hero-ctas .btn {
+        width: 100%;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .results-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- FLOATING GLOW BACKGROUND -->
+  <div class="glow-circle glow-1"></div>
+  <div class="glow-circle glow-2"></div>
+
+  <!-- HEADER -->
+  <header class="header" id="header">
+    <div class="container header-nav">
+      <a href="#" class="logo-container">
+        <!-- Vridhi Stylized Upward Trend Icon -->
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M6 24L13.5 16.5L18.5 21.5L26 12M26 12H19.5M26 12V18.5" stroke="#00C896" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M4 28H28" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.3"/>
+        </svg>
+        <span class="logo-text">Vridhi</span>
+      </a>
+
+      <nav>
+        <ul class="nav-list" id="nav-list">
+          <li><a href="#features" class="nav-link">Features</a></li>
+          <li><a href="#calculator" class="nav-link">Calculator</a></li>
+          <li><a href="#investments" class="nav-link">Investments</a></li>
+          <li><a href="#testimonials" class="nav-link">Reviews</a></li>
+          <li><a href="#faqs" class="nav-link">FAQs</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle Theme">
+          <!-- Sun Icon (shown in light mode) -->
+          <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <!-- Moon Icon (shown in dark mode) -->
+          <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+
+        <a href="#calculator" class="btn btn-primary" style="padding: 10px 20px; font-size: 0.85rem;">Start Saving</a>
+
+        <button class="menu-toggle" id="menu-toggle" aria-label="Open Navigation Menu">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="hero-section container">
+    <div class="hero-grid">
+      <div class="hero-content reveal">
+        <h1>Grow Your Wealth, One <span class="highlight">Smart Decision</span> at a Time</h1>
+        <p>Unlock the power of compound interest, track your savings, monitor diversified investments, and receive AI-guided tips to accelerate your financial freedom journey.</p>
+        <div class="hero-ctas">
+          <a href="#calculator" class="btn btn-primary">Start Saving Now</a>
+          <a href="#how-it-works" class="btn btn-secondary">See How It Works</a>
+        </div>
+      </div>
+      <div class="hero-visual reveal" style="transition-delay: 200ms;">
+        <div class="glass-card hero-graphic-card">
+          <div class="graphic-header">
+            <div>
+              <div class="graphic-title">Future Balance</div>
+              <div class="graphic-balance">₹38,24,910</div>
+            </div>
+            <div class="graphic-badge">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                <polyline points="17 6 23 6 23 12"></polyline>
+              </svg>
+              +14.2%
+            </div>
+          </div>
+          <!-- Styled SVG graphic portraying wealth compounding -->
+          <svg class="graphic-chart-svg" viewBox="0 0 400 180" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="chart-grad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="var(--accent-green)" stop-opacity="0.3"/>
+                <stop offset="100%" stop-color="var(--accent-green)" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <!-- Grid Lines -->
+            <line x1="10" y1="160" x2="390" y2="160" stroke="var(--card-border)" stroke-width="1"/>
+            <line x1="10" y1="120" x2="390" y2="120" stroke="var(--card-border)" stroke-width="1" stroke-dasharray="4"/>
+            <line x1="10" y1="80" x2="390" y2="80" stroke="var(--card-border)" stroke-width="1" stroke-dasharray="4"/>
+            <line x1="10" y1="40" x2="390" y2="40" stroke="var(--card-border)" stroke-width="1" stroke-dasharray="4"/>
+            
+            <!-- Curved Area -->
+            <path d="M 10 160 Q 100 150 180 120 T 320 60 T 380 20 L 380 160 Z" fill="url(#chart-grad)"/>
+            <!-- Line Stroke -->
+            <path d="M 10 160 Q 100 150 180 120 T 320 60 T 380 20" fill="none" stroke="var(--accent-green)" stroke-width="3" stroke-linecap="round"/>
+            
+            <!-- Compounding effect split point line -->
+            <path d="M 10 160 Q 100 155 180 145 T 320 135 T 380 125" fill="none" stroke="var(--text-muted)" stroke-width="2" stroke-dasharray="4"/>
+            
+            <!-- Indicator Dots -->
+            <circle cx="380" cy="20" r="4" class="pulse-dot" />
+            <text x="360" y="15" fill="var(--text-primary)" font-size="10" font-family="Inter" font-weight="700">₹38L</text>
+            <text x="360" y="145" fill="var(--text-muted)" font-size="10" font-family="Inter" font-weight="600">Invested</text>
+          </svg>
+          <div style="display: flex; justify-content: space-between; margin-top: 16px; font-size: 0.8rem; color: var(--text-muted); font-weight: 500;">
+            <span>Start</span>
+            <span>Year 5</span>
+            <span>Year 10</span>
+            <span>Year 15</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS BAR -->
+  <section class="stats-bar">
+    <div class="container stats-grid" id="stats-container">
+      <div class="stat-item">
+        <h3>₹<span class="count-num" data-target="50">0</span>Cr+</h3>
+        <p>User Capital Tracked</p>
+      </div>
+      <div class="stat-item">
+        <h3><span class="count-num" data-target="100">0</span>K+</h3>
+        <p>Active Savers</p>
+      </div>
+      <div class="stat-item">
+        <h3><span class="count-num" data-target="49" data-decimals="1">0</span>★</h3>
+        <p>App Store Review</p>
+      </div>
+      <div class="stat-item">
+        <h3><span class="count-num" data-target="100">0</span>%</h3>
+        <p>Safe &amp; Secured</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES SECTION -->
+  <section id="features" class="section container">
+    <div class="section-title reveal">
+      <h2>Engineered for <span class="highlight">Accelerated Growth</span></h2>
+      <p>Ditch complex spreadsheets. Vridhi gives you a direct, automated interface to organize your money, compound savings, and invest intelligently.</p>
+    </div>
+    
+    <div class="features-grid">
+      <!-- Feature 1 -->
+      <div class="glass-card feature-card reveal">
+        <div class="feature-icon-wrapper">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="1" x2="12" y2="23"></line>
+            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+          </svg>
+        </div>
+        <div>
+          <h3>Smart Savings Tracker</h3>
+          <p>Securely link your accounts or track manually to find leaky expenses. Learn where you spend, how much you save, and auto-recommend optimized surplus allocations.</p>
+        </div>
+      </div>
+
+      <!-- Feature 2 -->
+      <div class="glass-card feature-card reveal" style="transition-delay: 150ms;">
+        <div class="feature-icon-wrapper">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="9" y1="3" x2="9" y2="21"></line>
+            <line x1="15" y1="3" x2="15" y2="21"></line>
+            <line x1="3" y1="9" x2="21" y2="9"></line>
+            <line x1="3" y1="15" x2="21" y2="15"></line>
+          </svg>
+        </div>
+        <div>
+          <h3>Investment Portfolio Dashboard</h3>
+          <p>Get a bird's-eye view of your mutual funds, equity holdings, bank fixed deposits, digital gold, and PPF in one cohesive, auto-updating dashboard.</p>
+        </div>
+      </div>
+
+      <!-- Feature 3 -->
+      <div class="glass-card feature-card reveal">
+        <div class="feature-icon-wrapper">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+            <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+            <line x1="12" y1="22.08" x2="12" y2="12"></line>
+          </svg>
+        </div>
+        <div>
+          <h3>AI-Powered Insights</h3>
+          <p>Receive personalized smart nudges. Learn when to rebalance your asset allocation, how to claim maximum tax deductions (under Section 80C), and identify high-cost funds.</p>
+        </div>
+      </div>
+
+      <!-- Feature 4 -->
+      <div class="glass-card feature-card reveal" style="transition-delay: 150ms;">
+        <div class="feature-icon-wrapper">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <circle cx="12" cy="12" r="6"></circle>
+            <circle cx="12" cy="12" r="2"></circle>
+          </svg>
+        </div>
+        <div>
+          <h3>Goal-Based Planning</h3>
+          <p>Create hyper-focused savings buckets for your life milestones — whether it's an emergency fund, your child's higher education, or early retirement. Track milestones in real time.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS Section -->
+  <section id="how-it-works" class="section" style="background-color: var(--bg-secondary); border-top: 1px solid var(--card-border); border-bottom: 1px solid var(--card-border);">
+    <div class="container">
+      <div class="section-title reveal">
+        <h2>Your Journey to Financial Freedom</h2>
+        <p>Three simple steps to build consistent wealth, eliminate money stress, and automate compounding.</p>
+      </div>
+
+      <div class="how-it-works-grid">
+        <!-- Step 1 -->
+        <div class="step-card reveal">
+          <div class="step-number">01</div>
+          <div class="step-content">
+            <div class="step-icon-wrapper">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="8.5" cy="7" r="4"></circle>
+                <polyline points="17 11 19 13 23 9"></polyline>
+              </svg>
+            </div>
+            <h3>Link Accounts Securely</h3>
+            <p>Sync your cash accounts, savings schemes, or FDs via read-only interfaces. 256-bit encryption protects every byte.</p>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="step-card reveal" style="transition-delay: 150ms;">
+          <div class="step-number">02</div>
+          <div class="step-content">
+            <div class="step-icon-wrapper">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+            </div>
+            <h3>Define Saving Goals</h3>
+            <p>Specify the target corpus, target timeline, and risk comfort. Vridhi designs a tailored monthly SIP layout just for you.</p>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="step-card reveal" style="transition-delay: 300ms;">
+          <div class="step-number">03</div>
+          <div class="step-content">
+            <div class="step-icon-wrapper">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                <path d="M2 17l10 5 10-5"></path>
+                <path d="M2 12l10 5 10-5"></path>
+              </svg>
+            </div>
+            <h3>Unlock Exponential Growth</h3>
+            <p>Automate monthly contributions, optimize allocations with AI, and track compounding projections daily.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SAVINGS CALCULATOR SECTION -->
+  <section id="calculator" class="section container">
+    <div class="section-title reveal">
+      <h2>Interactive Compound <span class="highlight">Wealth Calculator</span></h2>
+      <p>Simulate systematic investment plan (SIP) growth. See how small, regular monthly savings convert into massive wealth over time.</p>
+    </div>
+
+    <div class="glass-card calculator-layout reveal">
+      <!-- Inputs Column -->
+      <div class="calculator-inputs">
+        <!-- Input 1: Monthly Investment -->
+        <div class="input-group">
+          <div class="input-label-row">
+            <span>Monthly Savings (SIP)</span>
+            <span class="input-val-box" id="monthly-savings-val">₹10,000</span>
+          </div>
+          <input type="range" class="range-slider" id="monthly-savings-slider" min="1000" max="100000" step="500" value="10000">
+          <div class="quick-values">
+            <button class="quick-val-btn" onclick="setSlider('monthly-savings-slider', 5000)">₹5k</button>
+            <button class="quick-val-btn" onclick="setSlider('monthly-savings-slider', 15000)">₹15k</button>
+            <button class="quick-val-btn" onclick="setSlider('monthly-savings-slider', 25000)">₹25k</button>
+            <button class="quick-val-btn" onclick="setSlider('monthly-savings-slider', 50000)">₹50k</button>
+          </div>
+        </div>
+
+        <!-- Input 2: Return Rate -->
+        <div class="input-group">
+          <div class="input-label-row">
+            <span>Expected Return Rate (p.a.)</span>
+            <span class="input-val-box" id="return-rate-val">12%</span>
+          </div>
+          <input type="range" class="range-slider" id="return-rate-slider" min="3" max="25" step="0.5" value="12">
+          <div class="quick-values">
+            <button class="quick-val-btn" onclick="setSlider('return-rate-slider', 7.1)">7.1% (PPF)</button>
+            <button class="quick-val-btn" onclick="setSlider('return-rate-slider', 12)">12% (MF Conservative)</button>
+            <button class="quick-val-btn" onclick="setSlider('return-rate-slider', 15)">15% (MF Aggressive)</button>
+          </div>
+        </div>
+
+        <!-- Input 3: Duration -->
+        <div class="input-group">
+          <div class="input-label-row">
+            <span>Investment Duration</span>
+            <span class="input-val-box" id="duration-val">10 Years</span>
+          </div>
+          <input type="range" class="range-slider" id="duration-slider" min="1" max="30" step="1" value="10">
+          <div class="quick-values">
+            <button class="quick-val-btn" onclick="setSlider('duration-slider', 5)">5 Yrs</button>
+            <button class="quick-val-btn" onclick="setSlider('duration-slider', 15)">15 Yrs</button>
+            <button class="quick-val-btn" onclick="setSlider('duration-slider', 25)">25 Yrs</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Results & Chart Column -->
+      <div class="calculator-results">
+        <div class="results-grid">
+          <div class="result-box">
+            <p>Total Invested</p>
+            <h4 id="calc-invested">₹12,00,000</h4>
+          </div>
+          <div class="result-box">
+            <p>Est. Returns</p>
+            <h4 id="calc-returns">₹11,23,391</h4>
+          </div>
+          <div class="result-box highlighted-box">
+            <p>Future Value</p>
+            <h4 id="calc-total">₹23,23,391</h4>
+          </div>
+        </div>
+
+        <div class="chart-container">
+          <div class="chart-title-area">
+            <span>Compounding Curve</span>
+            <div class="chart-legend">
+              <div class="legend-item">
+                <span class="legend-color legend-invested"></span>
+                <span>Invested</span>
+              </div>
+              <div class="legend-item">
+                <span class="legend-color legend-wealth"></span>
+                <span>Wealth Gained</span>
+              </div>
+            </div>
+          </div>
+          <div class="canvas-wrapper">
+            <canvas id="calcChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INVESTMENT CATEGORIES -->
+  <section id="investments" class="section" style="background-color: var(--bg-secondary); border-top: 1px solid var(--card-border); border-bottom: 1px solid var(--card-border);">
+    <div class="container">
+      <div class="section-title reveal">
+        <h2>Diversify in Top-Tier Assets</h2>
+        <p>Different assets serve different financial purposes. Learn the risk parameters and average returns in the Indian market.</p>
+      </div>
+
+      <div class="investment-grid">
+        <!-- Mutual Funds -->
+        <div class="glass-card investment-card reveal">
+          <div class="inv-top">
+            <div class="inv-badge-row">
+              <span class="inv-risk risk-medium">Medium Risk</span>
+              <span class="inv-returns">12 - 15% p.a.</span>
+            </div>
+            <h3>Mutual Funds</h3>
+            <p>Professionally managed pools ideal for monthly SIPs. Benefit from rupee cost averaging and diversified market exposure.</p>
+          </div>
+          <a href="#calculator" class="inv-link">
+            Calculate SIP Growth
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
+        </div>
+
+        <!-- Fixed Deposits -->
+        <div class="glass-card investment-card reveal" style="transition-delay: 100ms;">
+          <div class="inv-top">
+            <div class="inv-badge-row">
+              <span class="inv-risk risk-low">Low Risk</span>
+              <span class="inv-returns">6.5 - 7.5% p.a.</span>
+            </div>
+            <h3>Fixed Deposits</h3>
+            <p>Guaranteed returns backed by deposit insurance. Perfect for storing emergency cash and short-term capital preservation.</p>
+          </div>
+          <a href="#calculator" class="inv-link">
+            Calculate FD Yield
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
+        </div>
+
+        <!-- Equity Stocks -->
+        <div class="glass-card investment-card reveal" style="transition-delay: 200ms;">
+          <div class="inv-top">
+            <div class="inv-badge-row">
+              <span class="inv-risk risk-high">High Risk</span>
+              <span class="inv-returns">15 - 20% p.a.</span>
+            </div>
+            <h3>Direct Equity</h3>
+            <p>Direct ownership in India's leading enterprises. High volatility, but yields maximum returns for long-term compounders.</p>
+          </div>
+          <a href="#calculator" class="inv-link">
+            Simulate Stock Return
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
+        </div>
+
+        <!-- Sovereign Gold -->
+        <div class="glass-card investment-card reveal" style="transition-delay: 300ms;">
+          <div class="inv-top">
+            <div class="inv-badge-row">
+              <span class="inv-risk risk-low">Low Risk</span>
+              <span class="inv-returns">8 - 10% p.a.</span>
+            </div>
+            <h3>Sovereign Gold Bonds</h3>
+            <p>Digital, tax-free gold backed by the Government of India. Offers an additional 2.5% fixed interest payouts.</p>
+          </div>
+          <a href="#calculator" class="inv-link">
+            Gold Projections
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS SECTION -->
+  <section id="testimonials" class="section container">
+    <div class="section-title reveal">
+      <h2>Loved by Smart Savers</h2>
+      <p>Hear how working professionals, freelancers, and household savers are optimizing their financial health.</p>
+    </div>
+
+    <div class="testimonials-grid">
+      <!-- Testimonial 1 -->
+      <div class="glass-card testimonial-card reveal">
+        <span class="quote-icon">“</span>
+        <div class="testimonial-stars">
+          <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+        </div>
+        <p class="testimonial-text">"Vridhi completely transformed my savings flow. The dynamic SIP planning tool made me realize how small adjustments of ₹5,000/month create enormous retirement corpuses. It's clean, intuitive, and extremely fast."</p>
+        <div class="testimonial-user">
+          <div class="user-avatar">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 4c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm-1 12.2c-2.7 0-5.1-1.37-6.5-3.48.03-1.99 4-3.08 6.5-3.08 2.49 0 6.47 1.08 6.5 3.08-1.4 2.11-3.8 3.48-6.5 3.48z"/>
+            </svg>
+          </div>
+          <div class="user-info">
+            <h4>Priya Sharma</h4>
+            <p>Senior Product Analyst, Bengaluru</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Testimonial 2 -->
+      <div class="glass-card testimonial-card reveal" style="transition-delay: 150ms;">
+        <span class="quote-icon">“</span>
+        <div class="testimonial-stars">
+          <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+        </div>
+        <p class="testimonial-text">"I always wanted to diversify away from raw bank savings, but found mutual funds confusing. The simple categorization of risk-reward profiles in Vridhi gave me the confidence to build my first investment bucket."</p>
+        <div class="testimonial-user">
+          <div class="user-avatar">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 4c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm-1 12.2c-2.7 0-5.1-1.37-6.5-3.48.03-1.99 4-3.08 6.5-3.08 2.49 0 6.47 1.08 6.5 3.08-1.4 2.11-3.8 3.48-6.5 3.48z"/>
+            </svg>
+          </div>
+          <div class="user-info">
+            <h4>Amit Patel</h4>
+            <p>Co-Founder, Mumbai TechLabs</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Testimonial 3 -->
+      <div class="glass-card testimonial-card reveal" style="transition-delay: 300ms;">
+        <span class="quote-icon">“</span>
+        <div class="testimonial-stars">
+          <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+        </div>
+        <p class="testimonial-text">"The interface and responsiveness are incredible. The dark mode is extremely comfortable on the eyes. Using the compound interest calculator with live canvas visualizations is deeply satisfying."</p>
+        <div class="testimonial-user">
+          <div class="user-avatar">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 4c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm-1 12.2c-2.7 0-5.1-1.37-6.5-3.48.03-1.99 4-3.08 6.5-3.08 2.49 0 6.47 1.08 6.5 3.08-1.4 2.11-3.8 3.48-6.5 3.48z"/>
+            </svg>
+          </div>
+          <div class="user-info">
+            <h4>Rohan Sen</h4>
+            <p>Freelance UX Designer, Kolkata</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ ACCORDION -->
+  <section id="faqs" class="section" style="background-color: var(--bg-secondary); border-top: 1px solid var(--card-border); border-bottom: 1px solid var(--card-border);">
+    <div class="container">
+      <div class="section-title reveal">
+        <h2>Frequently Asked Questions</h2>
+        <p>Quick answers to basic concepts regarding savings planning and Vridhi platform operations.</p>
+      </div>
+
+      <div class="faq-layout reveal">
+        <!-- FAQ 1 -->
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>What is a Systematic Investment Plan (SIP)?</span>
+            <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+          <div class="faq-answer-wrapper">
+            <div class="faq-answer">
+              A Systematic Investment Plan (SIP) allows you to invest a small, fixed sum of money regularly (e.g., monthly) into a mutual fund scheme rather than making a one-time lump sum payment. Over time, SIPs offer the benefits of rupee cost averaging and power compounding to build large financial reserves.
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ 2 -->
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Is Vridhi a financial advisor or broker?</span>
+            <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+          <div class="faq-answer-wrapper">
+            <div class="faq-answer">
+              No. Vridhi is a personal finance tracker, planner, and education tool. We are not a SEBI-registered advisory or stock broker. We do not sell direct financial products. Our goal is to provide visual analytics and clean calculator layouts to support your budgeting and investment planning.
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ 3 -->
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>How safe is my financial tracking data?</span>
+            <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+          <div class="faq-answer-wrapper">
+            <div class="faq-answer">
+              Vridhi employs bank-grade security protocols. If you opt to link bank credentials, they are handled via read-only APIs certified by Indian Account Aggregators. We never store critical passwords, we never sell your demographic data, and you can delete your profile at any time.
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ 4 -->
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>What returns should I assume on my calculations?</span>
+            <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+          <div class="faq-answer-wrapper">
+            <div class="faq-answer">
+              For conservative models (like Public Provident Funds, Senior Citizen Savings Schemes, or long FDs), use 6.5% - 7.5%. For balanced or hybrid mutual funds, 10% - 12% is common. For equity mutual funds over a 7+ year horizon, historical metrics suggest 12% - 15% annual compounding. Always model realistic rates.
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ 5 -->
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Does Vridhi support offline accounts?</span>
+            <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+          <div class="faq-answer-wrapper">
+            <div class="faq-answer">
+              Yes. You can add offline properties, inheritance assets, physical gold holdings, or private loans as manual buckets in our dashboard to maintain a centralized view of your net worth.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER SECTION -->
+  <section class="section container newsletter-section">
+    <div class="glass-card newsletter-card reveal">
+      <h2>Get Weekly Money Tips</h2>
+      <p>Join 45,000+ smart Indian investors. Receive curated newsletters covering tax-saving strategies, mutual fund comparisons, and investment basics.</p>
+      
+      <form class="newsletter-form" id="newsletter-form" onsubmit="handleSubscribe(event)">
+        <input type="email" class="email-input" id="email-field" placeholder="Enter your email address" required aria-label="Email Address">
+        <button type="submit" class="btn btn-primary">Subscribe</button>
+      </form>
+      <div class="privacy-note">No spam. Unsubscribe anytime with a single click.</div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <!-- Col 1: Brand -->
+      <div class="footer-brand">
+        <a href="#" class="logo-container">
+          <svg width="28" height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 24L13.5 16.5L18.5 21.5L26 12M26 12H19.5M26 12V18.5" stroke="#00C896" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="logo-text" style="font-size: 1.3rem;">Vridhi</span>
+        </a>
+        <p class="footer-tagline">Empowering Indian households to optimize savings, secure compounding wealth, and learn systematic money habits.</p>
+        <div class="footer-socials">
+          <a href="#" class="social-btn" aria-label="Twitter">
+            <svg fill="currentColor" viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>
+          </a>
+          <a href="#" class="social-btn" aria-label="LinkedIn">
+            <svg fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.779-1.75-1.75s.784-1.75 1.75-1.75 1.75.779 1.75 1.75-.784 1.75-1.75 1.75zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+          </a>
+          <a href="#" class="social-btn" aria-label="YouTube">
+            <svg fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.163a3.003 3.003 0 00-2.11-2.11C19.518 3.545 12 3.545 12 3.545s-7.518 0-9.388.507a3.003 3.003 0 00-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 002.11 2.11c1.87.507 9.388.507 9.388.507s7.518 0 9.388-.507a3.003 3.003 0 002.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Col 2: Navigation Links -->
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul class="footer-links">
+          <li><a href="#features" class="footer-link">About Us</a></li>
+          <li><a href="#features" class="footer-link">Features</a></li>
+          <li><a href="#investments" class="footer-link">Investment Guide</a></li>
+          <li><a href="#testimonials" class="footer-link">Savers Stories</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 3: Legal & Resources -->
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul class="footer-links">
+          <li><a href="#" class="footer-link">Privacy Policy</a></li>
+          <li><a href="#" class="footer-link">Terms of Service</a></li>
+          <li><a href="#" class="footer-link">Security Policies</a></li>
+          <li><a href="#" class="footer-link">Cookie Preferences</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 4: App Badges -->
+      <div class="footer-col">
+        <h4>Download App</h4>
+        <div class="footer-app-badges">
+          <button class="app-badge-btn">
+            <svg fill="currentColor" viewBox="0 0 24 24">
+              <path d="M17.5 12.5c-.02-2.73 2.22-4.04 2.32-4.1-1.27-1.86-3.26-2.11-3.96-2.16-1.68-.17-3.29.99-4.14.99-.86 0-2.2-.97-3.64-.94-1.9.03-3.65 1.11-4.63 2.81-1.97 3.42-.5 8.47 1.41 11.23.94 1.35 2.03 2.86 3.49 2.81 1.41-.06 1.94-.91 3.65-.91 1.7 0 2.19.91 3.66.88 1.5-.03 2.47-1.37 3.4-2.73 1.08-1.57 1.52-3.1 1.54-3.18-.04-.02-2.98-1.14-3.01-4.6zm-2.02-8.98c.75-.91 1.25-2.17 1.11-3.43-1.08.04-2.39.72-3.17 1.63-.69.8-1.3 2.08-1.14 3.32 1.2.09 2.45-.61 3.2-1.52z"/>
+            </svg>
+            <div class="app-badge-text">
+              <p>Download on the</p>
+              <h4>App Store</h4>
+            </div>
+          </button>
+          
+          <button class="app-badge-btn">
+            <svg fill="currentColor" viewBox="0 0 24 24">
+              <path d="M5.23 2.03c-.22.22-.36.56-.36.99v17.97c0 .43.14.77.36.99l.06.06L15.35 12l.02-.02L5.29 1.97l-.06.06zM18.8 8.55l-3.43 3.43.02.02 3.43 3.43.07-.04 4.07-2.31c1.16-.66 1.16-1.74 0-2.4l-4.07-2.31-.09.18zM15.37 12.02L5.29 22.1l10.08-10.08zM15.37 11.98l-10.08-10 10.08 10z"/>
+            </svg>
+            <div class="app-badge-text">
+              <p>Get it on</p>
+              <h4>Google Play</h4>
+            </div>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom container">
+      <p class="disclaimer">
+        Disclaimer: Mutual Fund investments are subject to market risks. Please read all scheme-related documents carefully before investing. Historical returns are indicators of past performance and do not guarantee future yields. Vridhi is a visual calculation, analytics, and budgeting software tool created for financial literacy and tracking purposes. It does not recommend, buy, or sell stock equities, bonds, or specific fund portfolios, and does not operate as a licensed investment advisor or SEBI brokerage firm.
+      </p>
+      <p class="copyright">&copy; 2026 Vridhi Personal Finance. All Rights Reserved. Crafted with secure integrity.</p>
+    </div>
+  </footer>
+
+  <!-- NEWSLETTER FLOATING TOAST ALERT -->
+  <div class="toast" id="toast">
+    <div class="toast-icon">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="20 6 9 17 4 12"></polyline>
+      </svg>
+    </div>
+    <div class="toast-message" id="toast-message">Subscription Successful! Welcome to Vridhi.</div>
+  </div>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    /* STICKY NAV */
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    /* MOBILE NAVIGATION */
+    const menuToggle = document.getElementById('menu-toggle');
+    const navList = document.getElementById('nav-list');
+    
+    menuToggle.addEventListener('click', () => {
+      navList.classList.toggle('open');
+    });
+
+    // Close menu when clicking link
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        navList.classList.remove('open');
+      });
+    });
+
+    /* LIGHT / DARK MODE TOGGLE */
+    const themeToggle = document.getElementById('theme-toggle');
+    
+    // Check initial local storage
+    if (localStorage.getItem('theme') === 'light') {
+      document.body.classList.add('light-theme');
+    }
+
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('light-theme');
+      const isLight = document.body.classList.contains('light-theme');
+      localStorage.setItem('theme', isLight ? 'light' : 'dark');
+      
+      // Re-trigger calculator chart draw for matching colors
+      calculateSIP();
+    });
+
+    /* ACCORDION FAQ LOGIC */
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach(item => {
+      const question = item.querySelector('.faq-question');
+      const wrapper = item.querySelector('.faq-answer-wrapper');
+      
+      question.addEventListener('click', () => {
+        const isActive = item.classList.contains('active');
+        
+        // Close all other FAQs
+        faqItems.forEach(innerItem => {
+          innerItem.classList.remove('active');
+          innerItem.querySelector('.faq-answer-wrapper').style.maxHeight = '0px';
+        });
+
+        if (!isActive) {
+          item.classList.add('active');
+          // Set exact scrollHeight for smooth transition
+          wrapper.style.maxHeight = wrapper.scrollHeight + 'px';
+        }
+      });
+    });
+
+    /* REVEAL ON SCROLL ENGINE */
+    const revealElements = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+          observer.unobserve(entry.target); // Animate once
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: "0px 0px -50px 0px"
+    });
+
+    revealElements.forEach(el => revealObserver.observe(el));
+
+    /* STATS COUNTER ON SCROLL */
+    const countElements = document.querySelectorAll('.count-num');
+    let counted = false;
+
+    const countUp = () => {
+      countElements.forEach(el => {
+        const target = parseFloat(el.getAttribute('data-target'));
+        const decimals = parseInt(el.getAttribute('data-decimals') || '0');
+        let current = 0;
+        const duration = 1500; // ms
+        const stepTime = 16; // ms (~60fps)
+        const totalSteps = duration / stepTime;
+        const increment = target / totalSteps;
+        let step = 0;
+
+        const timer = setInterval(() => {
+          current += increment;
+          step++;
+          
+          if (step >= totalSteps) {
+            clearInterval(timer);
+            el.textContent = target.toFixed(decimals);
+          } else {
+            el.textContent = current.toFixed(decimals);
+          }
+        }, stepTime);
+      });
+    };
+
+    const statsContainer = document.getElementById('stats-container');
+    const statsObserver = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting && !counted) {
+        counted = true;
+        countUp();
+      }
+    }, { threshold: 0.5 });
+    
+    if (statsContainer) {
+      statsObserver.observe(statsContainer);
+    }
+
+    /* NEWSLETTER SUBSCRIPTION AND FLOATING TOAST */
+    function showToast(message, isSuccess = true) {
+      const toast = document.getElementById('toast');
+      const toastMsg = document.getElementById('toast-message');
+      
+      toastMsg.textContent = message;
+      toast.classList.add('show');
+      
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3500);
+    }
+
+    function handleSubscribe(e) {
+      e.preventDefault();
+      const emailField = document.getElementById('email-field');
+      const emailVal = emailField.value.trim();
+      
+      if (emailVal) {
+        showToast("Success! Check your inbox for weekly finance nuggets.");
+        emailField.value = "";
+      }
+    }
+
+    /* SAVINGS CALCULATOR CORE LOGIC */
+    const msSlider = document.getElementById('monthly-savings-slider');
+    const rrSlider = document.getElementById('return-rate-slider');
+    const dSlider = document.getElementById('duration-slider');
+
+    const msVal = document.getElementById('monthly-savings-val');
+    const rrVal = document.getElementById('return-rate-val');
+    const dVal = document.getElementById('duration-val');
+
+    const cInvested = document.getElementById('calc-invested');
+    const cReturns = document.getElementById('calc-returns');
+    const cTotal = document.getElementById('calc-total');
+
+    // Indian Number Formatting
+    const formatter = new Intl.NumberFormat('en-IN', {
+      style: 'currency',
+      currency: 'INR',
+      maximumFractionDigits: 0
+    });
+
+    // Helper to trigger range changes
+    function setSlider(sliderId, value) {
+      const slider = document.getElementById(sliderId);
+      slider.value = value;
+      // Trigger input event
+      const event = new Event('input', { bubbles: true });
+      slider.dispatchEvent(event);
+    }
+
+    // Chart Configuration & Sizing
+    const canvas = document.getElementById('calcChart');
+    const ctx = canvas.getContext('2d');
+
+    function resizeCanvas() {
+      const parent = canvas.parentElement;
+      const dpr = window.devicePixelRatio || 1;
+      
+      canvas.width = parent.clientWidth * dpr;
+      canvas.height = parent.clientHeight * dpr;
+      ctx.scale(dpr, dpr);
+    }
+
+    // Canvas drawing function for Compounding curve
+    function drawChart(years, investedArray, wealthArray) {
+      if (canvas.width === 0 || canvas.height === 0) return;
+      
+      const width = canvas.width / (window.devicePixelRatio || 1);
+      const height = canvas.height / (window.devicePixelRatio || 1);
+      
+      ctx.clearRect(0, 0, width, height);
+
+      const paddingLeft = 60;
+      const paddingRight = 20;
+      const paddingTop = 20;
+      const paddingBottom = 40;
+      
+      const chartWidth = width - paddingLeft - paddingRight;
+      const chartHeight = height - paddingTop - paddingBottom;
+
+      const maxVal = Math.max(...wealthArray, 1000); // fallback of 1000 to prevent division by zero
+      
+      // 1. Draw horizontal gridlines
+      ctx.strokeStyle = getComputedStyle(document.body).getPropertyValue('--card-border').trim() || 'rgba(0,0,0,0.1)';
+      ctx.lineWidth = 1;
+      
+      const gridSteps = 4;
+      for (let i = 0; i <= gridSteps; i++) {
+        const y = paddingTop + (chartHeight / gridSteps) * i;
+        ctx.beginPath();
+        ctx.moveTo(paddingLeft, y);
+        ctx.lineTo(width - paddingRight, y);
+        ctx.stroke();
+
+        // Y-axis labels
+        const gridVal = maxVal - (maxVal / gridSteps) * i;
+        ctx.fillStyle = getComputedStyle(document.body).getPropertyValue('--text-muted').trim() || '#6B7280';
+        ctx.font = '500 10px Inter';
+        ctx.textAlign = 'right';
+        
+        let label = '';
+        if (gridVal >= 10000000) {
+          label = '₹' + (gridVal / 10000000).toFixed(1) + 'Cr';
+        } else if (gridVal >= 100000) {
+          label = '₹' + (gridVal / 100000).toFixed(1) + 'L';
+        } else {
+          label = '₹' + (gridVal / 1000).toFixed(0) + 'K';
+        }
+        ctx.fillText(label, paddingLeft - 10, y + 4);
+      }
+
+      // X-axis indices (Years)
+      const xSteps = Math.min(years + 1, 6);
+      ctx.textAlign = 'center';
+      const labelDivisor = (xSteps - 1) === 0 ? 1 : (xSteps - 1);
+      for (let i = 0; i < xSteps; i++) {
+        const index = Math.round(years / labelDivisor * i);
+        const x = paddingLeft + (chartWidth / years) * index;
+        
+        ctx.fillStyle = getComputedStyle(document.body).getPropertyValue('--text-muted').trim() || '#6B7280';
+        ctx.font = '600 10px Inter';
+        ctx.fillText(`Yr ${index}`, x, height - 15);
+      }
+
+      // Coordinates mapping
+      const points = [];
+      for (let yr = 0; yr <= years; yr++) {
+        const x = paddingLeft + (chartWidth / years) * yr;
+        const yInvested = height - paddingBottom - (investedArray[yr] / maxVal) * chartHeight;
+        const yWealth = height - paddingBottom - (wealthArray[yr] / maxVal) * chartHeight;
+        points.push({ x, yInvested, yWealth });
+      }
+
+      // 2. Draw Areas (gradients)
+      const isLightTheme = document.body.classList.contains('light-theme');
+      
+      // Invested Area
+      const investedGrad = ctx.createLinearGradient(0, paddingTop, 0, height - paddingBottom);
+      investedGrad.addColorStop(0, 'rgba(59, 130, 246, 0.45)');
+      investedGrad.addColorStop(1, 'rgba(59, 130, 246, 0.02)');
+      
+      ctx.fillStyle = investedGrad;
+      ctx.beginPath();
+      ctx.moveTo(points[0].x, height - paddingBottom);
+      points.forEach(pt => ctx.lineTo(pt.x, pt.yInvested));
+      ctx.lineTo(points[points.length - 1].x, height - paddingBottom);
+      ctx.closePath();
+      ctx.fill();
+
+      // Total Wealth Area
+      const wealthGrad = ctx.createLinearGradient(0, paddingTop, 0, height - paddingBottom);
+      const accentGreen = isLightTheme ? 'rgba(0, 168, 126, 0.4)' : 'rgba(0, 200, 150, 0.4)';
+      wealthGrad.addColorStop(0, accentGreen);
+      wealthGrad.addColorStop(1, 'rgba(0, 200, 150, 0.02)');
+
+      ctx.fillStyle = wealthGrad;
+      ctx.beginPath();
+      ctx.moveTo(points[0].x, height - paddingBottom);
+      points.forEach(pt => ctx.lineTo(pt.x, pt.yWealth));
+      // Loop backwards through invested points to construct the stacked region
+      for (let yr = points.length - 1; yr >= 0; yr--) {
+        ctx.lineTo(points[yr].x, points[yr].yInvested);
+      }
+      ctx.closePath();
+      ctx.fill();
+
+      // 3. Draw boundary lines
+      // Invested line
+      ctx.strokeStyle = '#3B82F6';
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.moveTo(points[0].x, points[0].yInvested);
+      points.forEach(pt => pt.x !== undefined && pt.yInvested !== undefined ? ctx.lineTo(pt.x, pt.yInvested) : null);
+      ctx.stroke();
+
+      // Wealth gained line
+      ctx.strokeStyle = isLightTheme ? '#00A87E' : '#00C896';
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.moveTo(points[0].x, points[0].yWealth);
+      points.forEach(pt => pt.x !== undefined && pt.yWealth !== undefined ? ctx.lineTo(pt.x, pt.yWealth) : null);
+      ctx.stroke();
+    }
+
+    function calculateSIP() {
+      const P = parseFloat(msSlider.value);
+      const annualRate = parseFloat(rrSlider.value);
+      const years = parseInt(dSlider.value);
+
+      // Label outputs
+      msVal.textContent = formatter.format(P);
+      rrVal.textContent = annualRate + '%';
+      dVal.textContent = years + (years === 1 ? ' Year' : ' Years');
+
+      const monthlyRate = annualRate / 12 / 100;
+
+      // Cumulative calculations for graph plotting starting from Year 0
+      const investedArray = [0];
+      const wealthArray = [0];
+
+      let totalInvested = 0;
+      let futureValue = 0;
+
+      for (let yr = 1; yr <= years; yr++) {
+        const months = yr * 12;
+        const currentInvested = P * months;
+        let currentFV = 0;
+        
+        if (monthlyRate === 0) {
+          currentFV = currentInvested;
+        } else {
+          // SIP formula
+          currentFV = P * (((Math.pow(1 + monthlyRate, months) - 1) / monthlyRate) * (1 + monthlyRate));
+        }
+
+        investedArray.push(currentInvested);
+        wealthArray.push(currentFV);
+
+        if (yr === years) {
+          totalInvested = currentInvested;
+          futureValue = currentFV;
+        }
+      }
+
+      const estReturns = futureValue - totalInvested;
+
+      // Update values
+      cInvested.textContent = formatter.format(totalInvested);
+      cReturns.textContent = formatter.format(estReturns);
+      cTotal.textContent = formatter.format(futureValue);
+
+      drawChart(years, investedArray, wealthArray);
+    }
+
+    // Attach listeners
+    [msSlider, rrSlider, dSlider].forEach(slider => {
+      slider.addEventListener('input', calculateSIP);
+    });
+
+    // Handle resize
+    window.addEventListener('resize', () => {
+      resizeCanvas();
+      calculateSIP();
+    });
+
+    // Initial setup
+    document.addEventListener("DOMContentLoaded", () => {
+      resizeCanvas();
+      calculateSIP();
+    });
+  </script>
+</body>
+</html>
